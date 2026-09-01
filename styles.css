@@ -171,6 +171,11 @@ strong,b{color:var(--ink);font-weight:600}
 }
 .pill--solid{background:var(--olive);color:#fff}
 
+.hero__eyebrow{
+  font-family:var(--sans);font-weight:700;text-transform:uppercase;letter-spacing:.28em;
+  font-size:.85rem;color:var(--gold);margin:0 0 .5em;
+}
+
 .hero__title{
   font-family:var(--sans);font-weight:900;text-transform:uppercase;
   font-size:clamp(1.5rem,7.8vw,2.7rem);letter-spacing:-.02em;line-height:1.02;
@@ -397,10 +402,8 @@ strong,b{color:var(--ink);font-weight:600}
   body{padding-bottom:76px}
 }
 @media (min-width:560px){
-  .hero__photo img{aspect-ratio:16/13}
-}
-@media (min-width:560px){
   .reviews{columns:2}
+  .hero__photo img{aspect-ratio:4/5}
 }
 @media (min-width:768px){
   .sec{padding:76px 0}

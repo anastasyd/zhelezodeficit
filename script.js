@@ -1,18 +1,23 @@
 /* =========================================================
-   ССЫЛКА НА ОПЛАТУ
+   ССЫЛКА НА ОПЛАТУ (страница Bizon365)
    ---------------------------------------------------------
-   Вставь между кавычками ссылку на страницу оплаты
-   (Prodamus / ЮKassa / GetCourse / ChatPlace и т.п.).
-   Пример: const CHECKOUT_URL = "https://payform.ru/xxxxx/";
-   Пока ссылка пустая — кнопка «Оплатить» показывает подсказку.
+   Все кнопки «Принять участие / Оплатить» ведут сюда.
+   На этой странице у клиента своя форма (имя, почта, телефон)
+   и приём оплаты — данные вводятся ТАМ, не на лендинге.
+   Чтобы поменять — впиши новую ссылку между кавычками.
 ========================================================= */
-const CHECKOUT_URL = "";
+const CHECKOUT_URL = "https://anastasydiet.kassa.bizon365.ru/buy/intensiv-zhelezodeficit0";
 
-/* ---- Плавная прокрутка по якорям ---- */
+/* ---- Все CTA-кнопки ведут на страницу оплаты ---- */
+document.querySelectorAll(".js-cta").forEach((el) => {
+  if (CHECKOUT_URL) el.setAttribute("href", CHECKOUT_URL);
+});
+
+/* ---- Плавная прокрутка для внутренних якорей (#...) ---- */
 document.querySelectorAll('a[href^="#"]').forEach((a) => {
   a.addEventListener("click", (e) => {
     const id = a.getAttribute("href");
-    if (id.length < 2) return;
+    if (!id || id.length < 2) return;
     const el = document.querySelector(id);
     if (!el) return;
     e.preventDefault();
@@ -34,7 +39,7 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-/* ---- Липкая кнопка: прятать над формой оплаты ---- */
+/* ---- Липкая кнопка: прятать над блоком оплаты ---- */
 const sticky = document.getElementById("stickybar");
 const paySection = document.getElementById("oplata");
 if (sticky && paySection) {
@@ -48,29 +53,4 @@ if (sticky && paySection) {
     { threshold: 0.05 }
   );
   io2.observe(paySection);
-}
-
-/* ---- Форма оплаты ---- */
-const form = document.getElementById("payform");
-const hint = document.getElementById("payhint");
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    if (CHECKOUT_URL) {
-      // передаём данные покупателя в ссылку оплаты
-      const data = new FormData(form);
-      const params = new URLSearchParams();
-      for (const [k, v] of data.entries()) {
-        if (typeof v === "string") params.append(k, v);
-      }
-      const sep = CHECKOUT_URL.includes("?") ? "&" : "?";
-      window.location.href = CHECKOUT_URL + sep + params.toString();
-    } else {
-      hint.textContent = "Ссылка на оплату скоро будет подключена. Напишите в Telegram @anastasy_d — оформим участие вручную.";
-    }
-  });
 }

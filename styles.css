@@ -357,6 +357,7 @@ strong,b{color:var(--ink);font-weight:600}
 .pay__brand{font-family:var(--sans);font-weight:900;text-transform:uppercase;text-align:center;color:var(--ink);font-size:clamp(1.8rem,8vw,2.8rem);letter-spacing:-.01em;margin:0 0 .1em}
 .pay__sub{text-align:center;color:var(--muted);font-style:italic;margin:0 0 .3em}
 .pay__date{text-align:center;font-family:var(--sans);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--olive);margin:0 0 1.6em}
+.pay__secure{text-align:center;color:var(--muted);font-size:.95rem;font-style:italic;margin:14px 4px 0;line-height:1.42}
 
 .payform{background:var(--card);border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);border:1px solid var(--line)}
 .payform h3{margin:0 0 1em;font-size:clamp(1.2rem,5vw,1.5rem)}
